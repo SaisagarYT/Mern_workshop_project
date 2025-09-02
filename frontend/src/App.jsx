@@ -1,4 +1,5 @@
 import React from 'react';
+import 'remixicon/fonts/remixicon.css'
 import { Routes, Route } from 'react-router-dom';
 import Landingpage from './pages/Landingpage';
 import Datepage from './pages/Datepage';
@@ -10,7 +11,7 @@ import Gallerypage from './pages/Gallerypage';
 
 const App = () => {
   return (
-    <div>
+    <div className='overflow-hidden'>
       <Routes>
         <Route path='/' element={<Landingpage/>}/>
         <Route path='/date' element={<Datepage/>}/>

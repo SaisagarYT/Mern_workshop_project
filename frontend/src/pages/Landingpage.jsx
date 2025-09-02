@@ -6,7 +6,7 @@ import LandingPageTravelCard from '../reusable_components/LandingPageTravelCard'
 const Landingpage = () => {
   return (
     // Hero page
-    <section className='w-screen px-20'>
+    <section id='header' className='w-full min-h-screen overflow-x-hidden px-20'>
         {/* Navbar */}
       <nav className='w-full h-20 bg-gray-100 flex justify-between px-4'>
         <div className='h-full flex items-center  gap-5 flex-1/4'>
@@ -25,7 +25,9 @@ const Landingpage = () => {
         </div>
       </nav>
       <div className='w-full bg-gray-200 rounded-4xl h-130 relative'>
-        <img className='object-cover w-full h-full object-top rounded-4xl' src={siteImage.heroImage} alt="" />
+        <div className='w-full h-full rounded-2xl'>
+          <img className='object-cover w-full h-full object-top rounded-4xl' src={siteImage.heroImage} alt="" />
+        </div>
         {/* dataes and input */}
         <div className='w-full flex h-30 absolute px-5 bg-gray-50 border border-gray-200 -bottom-15 shadow-lg rounded-2xl'>
             <div className='w-200 h-full items-center flex'>
@@ -257,7 +259,6 @@ const Landingpage = () => {
       <section className='w-full h-screen'>
         <div className='w-full h-140 bg-gray-100 rounded-4xl relative'>
           <img className='h-full w-full object-cover rounded-4xl' src={siteImage.hill} alt="" />
-          <img src="" alt="" />
           <div className='absolute w-full h-full top-1/4 -translate-y-1/2 left-1/2 flex items-center justify-center flex-col gap-20 -translate-x-1/2'>
           <div className='w-full text-center mt-60'>
             <h1 className='text-5xl font-medium text-clip text-center text-shadow-[0px_0px_0px] text-shadow-white/60 text-transparent'>TRAVEL</h1>
@@ -285,47 +286,55 @@ const Landingpage = () => {
         <div className='w-full h-30 bg-gray-50 mt-10 flex items-center justify-center gap-3 flex-col'>
           <h1 className='text-4xl font-medium text-center py-2'>Singup to our Newsletter</h1>
           <div>
-            <input placeholder='Your email here...' className='border indent-4 outline-0 focus:ring-2 ring-blue-400 transition-all rounded-l-2xl h-14 border-gray-300 w-140 bg-white' type="text" />
+            <input placeholder='Your email here...' className='border indent-4 outline-0 focus:ring-2 ring-blue-400 focus:border-2 focus:border-blue-300 transition-all rounded-l-2xl h-14 border-gray-300 w-140 bg-white' type="email" />
             <button className='w-40 h-14 cursor-pointer bg-black rounded-r-2xl text-white font-medium'>Sign Up</button>
           </div>
         </div>
 
         {/* last page */}
-
-        <section className='w-full grid grid-cols-4 h-150 text-white bg-black/90 mt-10'>
-          <div className='w-full col-span-1'>
-            <ul>
-              <li>Just Trip</li>
+        <section className='w-full flex flex-col h-110 text-white bg-black/90 mt-10'>
+          <div className='w-full h-full p-10 flex justify-between items-center'>
+            <ul className='flex flex-col gap-5'>
+              <li className='text-3xl font-medium pb-5'>Just Trip</li>
               <li>+9139390303</li>
               <li>Sagar@gmail.com</li>
               <li>Tadepalligudem, AP</li>
-              <li>
+              <li className='text-2xl flex gap-5'>
                 <i className="ri-facebook-fill"></i>
                 <i className="ri-instagram-line"></i>
                 <i className="ri-twitter-line"></i>
               </li>
             </ul>
-            <ul>
-              <li>Useful Link</li>
-              <li>Upcoming Events</li>
-              <li>Booking a Ticket</li>
-              <li>Travel With Us</li>
-              <li>Our Gallary</li>
-              <li>Write Reivew</li>
-            </ul>
-            <ul>
-              <li>Useful Link</li>
-              <li>Upcoming Events</li>
-              <li>Booking a Ticket</li>
-              <li>Travel With Us</li>
-              <li>Our Gallary</li>
-              <li>Write Reivew</li>
-            </ul>
-            <ul>
-              <li>Useful Link</li>
-              <li>Upcoming Events</li>
-              <li>Booking a Ticket</li>
-            </ul>
+            <div className='flex gap-20'>
+              <ul className='flex flex-col gap-5'>
+                <li className='text-xl pb-5 font-medium'>Useful Link</li>
+                <li>Upcoming Events</li>
+                <li>Booking a Ticket</li>
+                <li>Travel With Us</li>
+                <li>Our Gallary</li>
+                <li>Write Reivew</li>
+              </ul>
+              <ul className='flex flex-col gap-5'>
+                <li className='text-xl pb-5 font-medium'>Useful Link</li>
+                <li>Upcoming Events</li>
+                <li>Booking a Ticket</li>
+                <li>Travel With Us</li>
+                <li>Our Gallary</li>
+                <li>Write Reivew</li>
+              </ul>
+              <ul className='flex flex-col gap-5'>
+                <li className='text-xl pb-5 font-medium'>Useful Link</li>
+                <li>Upcoming Events</li>
+                <li>Booking a Ticket</li>
+                <li>Our Gallary</li>
+              </ul>
+            </div>
+          </div>
+          <div className='w-full px-10 py-2 flex items-center justify-between'>
+            <p>Website is in Copyright</p>
+            <a href='#header' className='flex h-18 w-14 bg-white/85 rounded-lg items-center justify-baseline'>
+              <i className="ri-arrow-up-long-line text-black text-center w-full cursor-pointer font-medium text-2xl"></i>
+            </a>
           </div>
         </section>
       </section>
