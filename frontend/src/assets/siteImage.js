@@ -5,6 +5,14 @@ import kerela from './images/photo-1602216056096-3b40cc0c9944.jpeg';
 import goldenTemple from './images/PUNJAB-FEATURE-compressed.jpg';
 import kashmirHills from './images/betaab-valley.jpg'
 import goa from './images/internatio-3c7708bf333b9cd.jpg'
+import mahal from './images/desert.jpg';
+import lotusTemple from './images/lotus temple.jpg';
+import tajmahal2 from './images/taj2.jpeg';
+import mumbai from './images/mumbaigate.jpg';
+import pondicherry from './images/pandcherry.jpg';
+import rajastan from './images/rajastan.jpg';
+import hill from './images/hills.jpg'
+import hillCut from './images/hills-Photoroom.png'
 const siteImage = {
     heroImage:heroImage,
     tajMahal,
@@ -12,7 +20,15 @@ const siteImage = {
     kerela,
     goldenTemple,
     kashmirHills,
-    goa
+    goa,
+    mahal,
+    lotusTemple,
+    tajmahal2,
+    mumbai,
+    pondicherry,
+    rajastan,
+    hill,
+    hillCut
 }
 
 export default siteImage;

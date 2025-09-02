@@ -201,10 +201,135 @@ const Landingpage = () => {
         </div>
         </section>
       </section>
+      {/* Our Gallery Section */}
+      <section className='w-full min-h-screen bg-white py-20'>
+        <div className='max-w-[1400px] mx-auto px-8'>
+          {/* Section Title */}
+          <div className='relative inline-block mb-16'>
+            <h2 className='text-4xl font-semibold'>Our Gallery</h2>
+            <div className='absolute -bottom-3 left-0 w-32 h-4 bg-yellow-300 -z-10'></div>
+          </div>
 
-      <section className='w-full h-screen bg-blue-200'>
+          {/* Gallery Grid */}
+          <div className='grid grid-cols-4 gap-4 auto-rows-[300px]'>
+            {/* First Row */}
+            <div className='col-span-1 row-span-1'>
+              <img src={siteImage.mahal} alt="Modern Building" 
+                className='w-full h-full object-cover rounded-xl' />
+            </div>
+            <div className='col-span-1 row-span-1'>
+              <img src={siteImage.lotusTemple} alt="Temple" 
+                className='w-full h-full object-cover rounded-xl' />
+            </div>
+            <div className='col-span-1 row-span-1'>
+              <img src={siteImage.tajmahal2} alt="Palm Trees" 
+                className='w-full h-full object-cover rounded-xl' />
+            </div>
+            <div className='col-span-1 row-span-2'>
+              <img src={siteImage.mumbai} alt="Tourist Bus" 
+                className='w-full h-full object-cover rounded-xl' />
+            </div>
 
+            {/* Second Row */}
+            <div className='col-span-2 row-span-2'>
+              <img src={siteImage.tajMahal} alt="Japanese Temple" 
+                className='w-full h-full object-cover rounded-xl' />
+            </div>
+            <div className='col-span-1 row-span-1'>
+              <img src={siteImage.rajastan} alt="Beaver" 
+                className='w-full h-full object-cover rounded-xl' />
+            </div>
+
+            {/* Third Row */}
+            <div className='col-span-1 row-span-1'>
+              <img src={siteImage.kashmirHills} alt="Eiffel Tower" 
+                className='w-full h-full object-cover rounded-xl' />
+            </div>
+            <div className='col-span-1 row-span-1'>
+              <img src={siteImage.goa} alt="Coastal Town" 
+                className='w-full h-full object-cover rounded-xl' />
+            </div>
+          </div>
+        </div>
       </section>
+
+      {/* Footer Section */}
+      <section className='w-full h-screen'>
+        <div className='w-full h-140 bg-gray-100 rounded-4xl relative'>
+          <img className='h-full w-full object-cover rounded-4xl' src={siteImage.hill} alt="" />
+          <img src="" alt="" />
+          <div className='absolute w-full h-full top-1/4 -translate-y-1/2 left-1/2 flex items-center justify-center flex-col gap-20 -translate-x-1/2'>
+          <div className='w-full text-center mt-60'>
+            <h1 className='text-5xl font-medium text-clip text-center text-shadow-[0px_0px_0px] text-shadow-white/60 text-transparent'>TRAVEL</h1>
+            <h1 className='text-9xl font-bold text-white/90'>WITH US</h1>
+          </div>
+
+            <div className='w-full flex mt-40 items-center gap-10 justify-center'>
+              <span>
+                <i className="ri-map-pin-user-fill text-5xl text-white"></i>
+                <h1 className='font-medium text-white'>Search</h1>
+              </span>
+              <span>
+              <i className="ri-bookmark-3-line text-5xl text-white"></i>
+                <h1 className='font-medium text-white text-center'>Book</h1>
+              </span>
+              <span>
+              <i className="ri-suitcase-2-line text-5xl text-white"></i>
+                <h1 className='font-medium text-white text-center'>Travel</h1>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* singup */}
+        <div className='w-full h-30 bg-gray-50 mt-10 flex items-center justify-center gap-3 flex-col'>
+          <h1 className='text-4xl font-medium text-center py-2'>Singup to our Newsletter</h1>
+          <div>
+            <input placeholder='Your email here...' className='border indent-4 outline-0 focus:ring-2 ring-blue-400 transition-all rounded-l-2xl h-14 border-gray-300 w-140 bg-white' type="text" />
+            <button className='w-40 h-14 cursor-pointer bg-black rounded-r-2xl text-white font-medium'>Sign Up</button>
+          </div>
+        </div>
+
+        {/* last page */}
+
+        <section className='w-full grid grid-cols-4 h-150 text-white bg-black/90 mt-10'>
+          <div className='w-full col-span-1'>
+            <ul>
+              <li>Just Trip</li>
+              <li>+9139390303</li>
+              <li>Sagar@gmail.com</li>
+              <li>Tadepalligudem, AP</li>
+              <li>
+                <i className="ri-facebook-fill"></i>
+                <i className="ri-instagram-line"></i>
+                <i className="ri-twitter-line"></i>
+              </li>
+            </ul>
+            <ul>
+              <li>Useful Link</li>
+              <li>Upcoming Events</li>
+              <li>Booking a Ticket</li>
+              <li>Travel With Us</li>
+              <li>Our Gallary</li>
+              <li>Write Reivew</li>
+            </ul>
+            <ul>
+              <li>Useful Link</li>
+              <li>Upcoming Events</li>
+              <li>Booking a Ticket</li>
+              <li>Travel With Us</li>
+              <li>Our Gallary</li>
+              <li>Write Reivew</li>
+            </ul>
+            <ul>
+              <li>Useful Link</li>
+              <li>Upcoming Events</li>
+              <li>Booking a Ticket</li>
+            </ul>
+          </div>
+        </section>
+      </section>
+
     </section>
   )
 }
