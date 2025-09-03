@@ -64,7 +64,7 @@ const Datepage = () => {
     <div className="bg-gray-50 min-h-screen font-sans">
       {/* Hero Section */}
       <div className="relative h-[400px] bg-cover bg-center" style={{ backgroundImage: `url(${siteImage.heroImage})` }}>
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-opacity-40"></div>
         <nav className="relative z-10 flex items-center justify-end px-16 py-6">
           <button 
             onClick={() => navigate('/admin')}
@@ -73,9 +73,9 @@ const Datepage = () => {
             Create New Package
           </button>
         </nav>
-        <div className="relative z-10 flex flex-col items-center justify-center h-full pt-10">
-          <h2 className="text-white text-lg tracking-widest mb-2">Available Packages</h2>
-          <h1 className="text-white text-5xl md:text-6xl font-bold mb-4 drop-shadow-lg">Travel With Us</h1>
+        <div className="relative z-10 flex flex-col items-center mt-10 h-full pt-10">
+          <h2 className="text-white text-3xl tracking-widest mb-2">Available Packages</h2>
+          <h1 className="text-white text-6xl md:text-6xl font-bold mb-4 drop-shadow-lg">Travel With Us</h1>
         </div>
       </div>
 

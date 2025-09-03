@@ -1,15 +1,28 @@
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 
-// Configure multer for storing tour package images
+// Create uploads directory if it doesn't exist
+const createUploadsDir = () => {
+    const uploadsPath = path.join(__dirname, '..', 'uploads');
+    if (!fs.existsSync(uploadsPath)) {
+        fs.mkdirSync(uploadsPath, { recursive: true });
+    }
+};
+
+// Ensure uploads directory exists
+createUploadsDir();
+
+// Configure multer for storing uploaded files
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const uploadPath = path.join(__dirname, '..', 'uploads', 'tourpackages');
+    destination: (req, file, cb) => {
+        const uploadPath = path.join(__dirname, '..', 'uploads');
         cb(null, uploadPath);
     },
-    filename: function (req, file, cb) {
+    filename: (req, file, cb) => {
+        // Create unique filename with original extension
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+        cb(null, uniqueSuffix + path.extname(file.originalname));
     }
 });
 
@@ -22,12 +35,11 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
-// Create multer upload instance
 const upload = multer({
     storage: storage,
     fileFilter: fileFilter,
     limits: {
-        fileSize: 5 * 1024 * 1024 // 5MB max file size
+        fileSize: 5 * 1024 * 1024 // 5MB limit
     }
 });
 

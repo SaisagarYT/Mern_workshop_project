@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const multer = require('multer');
 dotenv.config();
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/student.routes');
@@ -27,6 +28,20 @@ app.use(cors());
 
 // Serve static files from uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Error handler for file uploads
+app.use((err, req, res, next) => {
+    if (err instanceof multer.MulterError) {
+        return res.status(400).json({
+            message: 'File upload error: ' + err.message
+        });
+    } else if (err) {
+        return res.status(500).json({
+            message: 'Internal server error: ' + err.message
+        });
+    }
+    next();
+});
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.set('view engine', 'ejs');

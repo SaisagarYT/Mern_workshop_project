@@ -19,7 +19,7 @@ const LandingPageTravelCard = ({ _id, name, destination, duration, price, descri
       <div className='h-48 relative flex-shrink-0'>
         <img 
           className='w-full h-full object-cover'
-          src={images?.[0] || siteImage.heroImage}
+          src={images[0] ? `http://localhost:5001${images[0]}` : siteImage.heroImage}
           alt={name}
         />
         {/* Price Tag */}
@@ -56,7 +56,7 @@ const LandingPageTravelCard = ({ _id, name, destination, duration, price, descri
           onClick={handleBookNow}
           className='w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition-colors mt-auto'
         >
-          Book Now
+          Show Package
         </button>
       </div>
     </div>

@@ -83,7 +83,7 @@ const Informationpage = () => {
       navigate('/auth');
     } else {
       // TODO: Implement booking functionality
-      alert('Booking functionality coming soon!');
+      alert('Booking');
     }
   };
 
@@ -93,14 +93,14 @@ const Informationpage = () => {
       <div 
         className="relative h-[350px] bg-cover bg-center" 
         style={{ 
-          backgroundImage: `url('${tourPackage.images?.[0] || 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80'}')`
+          backgroundImage: `url('${tourPackage.images?.[0] ? `http://localhost:5001${tourPackage.images[0]}` : 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80'}')`
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
         <nav className="relative z-10 flex items-center justify-between px-16 py-6">
           <div className="text-white text-2xl font-bold tracking-widest">Travel</div>
           <ul className="flex gap-8 text-white text-lg">
-            <li onClick={() => navigate('/')} className="hover:text-orange-400 cursor-pointer">Home</li>
+            <li onClick={() => navigate('/date')} className="hover:text-orange-400 cursor-pointer">Home</li>
             <li onClick={() => navigate('/date')} className="hover:text-orange-400 cursor-pointer">Packages</li>
             <li className="hover:text-orange-400 cursor-pointer">Contact</li>
           </ul>
@@ -188,7 +188,7 @@ const Informationpage = () => {
                     {tourPackage.images.map((img, i) => (
                       <img 
                         key={i} 
-                        src={img} 
+                        src={`http://localhost:5001${img}`} 
                         alt={`Tour ${i + 1}`} 
                         className="w-full h-48 object-cover rounded-lg shadow-md" 
                       />
@@ -218,7 +218,7 @@ const Informationpage = () => {
                       if (window.confirm('Are you sure you want to delete this tour package?')) {
                         try {
                           await axios.delete(`http://localhost:5001/api/package/remove/${id}`);
-                          navigate('/'); // Navigate back to home after deletion
+                          navigate('/date'); // Navigate to date page after deletion
                         } catch (error) {
                           setError('Failed to delete tour package');
                         }

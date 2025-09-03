@@ -15,13 +15,13 @@ const App = () => {
   return (
     <div className='overflow-hidden'>
       <Routes>
-        <Route path='/' element={<Landingpage/>}/>
+        {/* <Route path='/' element={<Landingpage/>}/> */}
         <Route path='/date' element={<Datepage/>}/>
         <Route path='/information/:id' element={<Informationpage/>}/>
         <Route path='/tourplan' element={<Tourplanpage/>}/>
         <Route path='/location' element={<Locationpage/>}/>
         <Route path='/gallery' element={<Gallerypage/>}/>
-        <Route path='/auth' element={<Auth/>}/>
+        <Route path='/' element={<Auth/>}/>
         <Route path='/admin' element={<AdminPage/>}/>
         <Route path='/update/:id' element={<UpdatePage/>}/>
       </Routes>
