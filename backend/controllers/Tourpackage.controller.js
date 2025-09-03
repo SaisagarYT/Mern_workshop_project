@@ -46,7 +46,7 @@ const insertTourPackage = async(req,res) =>{
             return res.status(400).json({message:"Package already exist in the DB"})
         }
         // Process uploaded files
-        const images = req.files ? req.files.map(file => `/uploads/tourpackages/${file.filename}`) : [];
+        const images = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
 
         const newPackage = await TourPackage.create({
             name,

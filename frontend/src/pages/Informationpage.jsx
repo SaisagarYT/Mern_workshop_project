@@ -9,6 +9,14 @@ const Informationpage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
+  
+  // Function to handle tab changes
+  const handleTabChange = (tabIndex) => {
+    console.log('Changing to tab:', tabIndex);
+    setActiveTab(tabIndex);
+    // Reset any error states if they exist
+    if (error) setError(null);
+  };
 
   useEffect(() => {
     const fetchTourPackage = async () => {
@@ -117,27 +125,21 @@ const Informationpage = () => {
         <div className="border-b border-gray-200 mb-8">
           <div className="flex gap-4">
             <button 
-              onClick={() => {
-                console.log('Switching to Information tab');
-                setActiveTab(0);
-              }}
-              className={`px-4 py-2 font-semibold rounded-t-lg transition-all duration-200 ${
+              onClick={() => handleTabChange(0)}
+              className={`px-6 py-3 font-semibold rounded-t-lg ${
                 activeTab === 0 
-                  ? 'text-orange-500 border-b-4 border-orange-500 bg-orange-50' 
-                  : 'text-gray-600 hover:text-orange-500 hover:bg-orange-50'
+                  ? 'text-orange-500 border-b-4 border-orange-500 bg-white' 
+                  : 'text-gray-600 hover:text-orange-500 hover:bg-gray-50'
               }`}
             >
               Information
             </button>
             <button 
-              onClick={() => {
-                console.log('Switching to Tour Plan tab');
-                setActiveTab(1);
-              }}
-              className={`px-4 py-2 font-semibold rounded-t-lg transition-all duration-200 ${
+              onClick={() => handleTabChange(1)}
+              className={`px-6 py-3 font-semibold rounded-t-lg cursor-pointer ${
                 activeTab === 1 
-                  ? 'text-orange-500 border-b-4 border-orange-500 bg-orange-50' 
-                  : 'text-gray-600 hover:text-orange-500 hover:bg-orange-50'
+                  ? 'text-orange-500 border-b-4 border-orange-500 bg-white' 
+                  : 'text-gray-600 hover:text-orange-500 hover:bg-gray-50'
               }`}
             >
               Tour Plan
@@ -146,7 +148,8 @@ const Informationpage = () => {
         </div>
 
         {/* Tab Content */}
-        {console.log('Current activeTab:', activeTab)}
+
+        {/* Tab Content */}
         {activeTab === 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Details Section */}
@@ -195,20 +198,37 @@ const Informationpage = () => {
               )}
             </div>
 
-            {/* Booking Section */}
+            {/* Admin Actions Section */}
             <div className="bg-white p-6 rounded-lg shadow-md h-fit">
-              <h3 className="text-xl font-semibold mb-4">Book this tour</h3>
+              <h3 className="text-xl font-semibold mb-4">Package Actions</h3>
               <div className="space-y-4">
                 <div className="flex justify-between items-center pb-4 border-b">
                   <span className="text-gray-600">Price per person</span>
                   <span className="text-2xl font-bold text-orange-500">₹{tourPackage.price}</span>
                 </div>
-                <button 
-                  onClick={handleBookNow}
-                  className="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition-colors"
-                >
-                  Book Now
-                </button>
+                <div className="flex flex-col gap-3">
+                  <button 
+                    onClick={() => navigate(`/update/${id}`)}
+                    className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors"
+                  >
+                    Update Tour
+                  </button>
+                  <button 
+                    onClick={async () => {
+                      if (window.confirm('Are you sure you want to delete this tour package?')) {
+                        try {
+                          await axios.delete(`http://localhost:5001/api/package/remove/${id}`);
+                          navigate('/'); // Navigate back to home after deletion
+                        } catch (error) {
+                          setError('Failed to delete tour package');
+                        }
+                      }
+                    }}
+                    className="w-full bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition-colors"
+                  >
+                    Delete Tour
+                  </button>
+                </div>
               </div>
             </div>
           </div>

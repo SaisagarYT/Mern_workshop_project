@@ -20,10 +20,13 @@ app.use(express.urlencoded({
     limit: '10mb' 
 }));
 
+// Serve static files from uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // CORS middleware
 app.use(cors());
 
 // Serve static files from uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.set('view engine', 'ejs');

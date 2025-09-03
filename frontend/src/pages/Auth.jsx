@@ -107,16 +107,16 @@ const Auth = () => {
           }
           // Store user info
           localStorage.setItem('userInfo', JSON.stringify(response.data.isExist));
-          // Redirect to previous page or home
-          navigate(-1);
+          // Redirect to date page
+          navigate('/date');
         }
       } else {
         // Handle registration success
         if (response.data) {
-          // Show success message and switch to login
+          // Show success message
           setError('');
           alert('Registration successful! Please login.');
-          setIsLogin(true);
+          
           // Reset form
           setFormData({
             email: '',
@@ -133,6 +133,9 @@ const Auth = () => {
               pincode: ''
             }
           });
+          
+          // Switch to login view
+          setIsLogin(true);
         }
       }
     } catch (err) {
@@ -155,13 +158,6 @@ const Auth = () => {
       {/* Left Side - Form */}
       <div className='flex-1 flex items-center justify-center p-8'>
         <div className='w-full max-w-md space-y-8'>
-          {/* Profile Icon */}
-          <div className='flex justify-center'>
-            <div className='w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl font-bold'>
-              G
-            </div>
-          </div>
-
           {/* Title and Description */}
           <div className='text-center'>
             <h2 className='text-2xl font-bold text-gray-900'>

@@ -67,9 +67,10 @@ const Datepage = () => {
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         <nav className="relative z-10 flex items-center justify-end px-16 py-6">
           <button 
-            onClick={() => navigate('/contact')}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-semibold shadow transition-colors">
-            Get in Touch
+            onClick={() => navigate('/admin')}
+            className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-semibold shadow transition-colors flex items-center gap-2">
+            <i className="ri-add-line"></i>
+            Create New Package
           </button>
         </nav>
         <div className="relative z-10 flex flex-col items-center justify-center h-full pt-10">

@@ -8,6 +8,8 @@ import Tourplanpage from './pages/Tourplanpage';
 import Locationpage from './pages/Locationpage';
 import Gallerypage from './pages/Gallerypage';
 import Auth from './pages/Auth';
+import AdminPage from './pages/AdminPage';
+import UpdatePage from './pages/UpdatePage';
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
         <Route path='/location' element={<Locationpage/>}/>
         <Route path='/gallery' element={<Gallerypage/>}/>
         <Route path='/auth' element={<Auth/>}/>
+        <Route path='/admin' element={<AdminPage/>}/>
+        <Route path='/update/:id' element={<UpdatePage/>}/>
       </Routes>
     </div>
   )

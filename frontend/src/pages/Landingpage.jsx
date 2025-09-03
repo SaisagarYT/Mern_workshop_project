@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import {Button,TextField,Select} from '@mui/material'
 import siteImage from '../assets/siteImage'
-import LandingPageTravelCard from '../reusable_components/LandingPageTravelCard'
+import LandingPageTravelCard from '../reusable_components/LandingPageTravelCard';
 
 const Landingpage = () => {
   const navigate = useNavigate();
@@ -50,17 +50,12 @@ const Landingpage = () => {
     // Hero page
     <section id='header' className='w-full min-h-screen overflow-x-hidden px-20'>
         {/* Navbar */}
-      <nav className='w-full h-20 bg-gray-100 flex justify-between px-4'>
+      <nav className='w-full h-20 bg-gray-100 rounded-b-2xl flex justify-between px-4'>
         <div className='h-full flex items-center  gap-5 flex-1/4'>
-            <span className='flex w-15 h-10 rounded-2xl bg-blue-200'></span>
+            <span className='flex w-15 h-15 rounded-2xl'>
+              <img src={siteImage.birdIcon} alt="" />
+            </span>
             <span className='text-2xl font-medium'>Just Trip</span>
-        </div>
-        <div className='flex-1/2 flex list-none items-center justify-between h-full'>
-            <li>HOME</li>
-            <li>ABOUT</li>
-            <li>PACKAGES</li>
-            <li>BLOG</li>
-            <li>CONTACT</li>
         </div>
         <div className='flex-1/4 flex items-center h-full justify-end'>
             <Button 
@@ -194,18 +189,20 @@ const Landingpage = () => {
             ) : (
               // Render packages
               packages.map((pkg) => (
-                <LandingPageTravelCard
-                  key={pkg._id}
-                  name={pkg.name}
-                  destination={pkg.destination}
-                  duration={pkg.duration?.split(' ')[0] || '0'} // Extract number from duration string
-                  price={pkg.price}
-                  description={pkg.description}
-                  images={pkg.images}
-                  available={pkg.availability}
-                  maxGroupSize={pkg.maxGroupSize}
-                  tags={pkg.tags}
-                />
+                <div onClick={() => navigate('/auth')}>
+                  <LandingPageTravelCard
+                    key={pkg._id}
+                    name={pkg.name}
+                    destination={pkg.destination}
+                    duration={pkg.duration?.split(' ')[0] || '0'} // Extract number from duration string
+                    price={pkg.price}
+                    description={pkg.description}
+                    images={pkg.images}
+                    available={pkg.availability}
+                    maxGroupSize={pkg.maxGroupSize}
+                    tags={pkg.tags}
+                  />
+                </div>
               ))
             )}
           </div>

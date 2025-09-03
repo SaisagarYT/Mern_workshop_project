@@ -13,6 +13,7 @@ import pondicherry from './images/pandcherry.jpg';
 import rajastan from './images/rajastan.jpg';
 import hill from './images/hills.jpg'
 import hillCut from './images/hills-Photoroom.png'
+import birdIcon from './images/phoenix-bird-logo-11549927145rehvx0kneo-removebg-preview.png'
 const siteImage = {
     heroImage:heroImage,
     tajMahal,
@@ -28,7 +29,8 @@ const siteImage = {
     pondicherry,
     rajastan,
     hill,
-    hillCut
+    hillCut,
+    birdIcon
 }
 
 export default siteImage;
