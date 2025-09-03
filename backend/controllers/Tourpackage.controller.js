@@ -1,22 +1,47 @@
 const TourPackage = require('../models/Tourpackage.model');
 
 const insertTourPackage = async(req,res) =>{
-    const {name,destination,duration,price,availability,maxGroupSize,description} = req.body;
-    let itinerary, tags;
-    
     try {
-        itinerary = JSON.parse(req.body.itinerary);
-        tags = JSON.parse(req.body.tags);
-    } catch (err) {
-        return res.status(400).json({message:"Invalid itinerary or tags format"});
-    }
-    
-    if(!name || !destination || !duration || !price || !maxGroupSize || !description || !itinerary){
-        return res.status(400).json({message:"Insufficient data"});
-    }
-    try{
-        const package = await TourPackage.findOne({name});
-        if(package){
+        const {
+            name,
+            destination,
+            duration,
+            price,
+            maxGroupSize,
+            description
+        } = req.body;
+
+        let itinerary = [], tags = [];
+        const availability = req.body.availability === 'true';
+
+        // Log the received data for debugging
+        console.log('Received itinerary:', req.body.itinerary);
+        console.log('Received tags:', req.body.tags);
+
+        // Handle JSON parsing with type checking
+        try {
+            if (typeof req.body.itinerary === 'string') {
+                itinerary = JSON.parse(req.body.itinerary);
+            } else if (Array.isArray(req.body.itinerary)) {
+                itinerary = req.body.itinerary;
+            }
+            
+            if (typeof req.body.tags === 'string') {
+                tags = JSON.parse(req.body.tags);
+            } else if (Array.isArray(req.body.tags)) {
+                tags = req.body.tags;
+            }
+        } catch (err) {
+            console.error('Parsing error:', err);
+            return res.status(400).json({message: "Invalid itinerary or tags format"});
+        }
+
+        if (!name || !destination || !duration || !price || !maxGroupSize || !description) {
+            return res.status(400).json({message: "Required fields are missing"});
+        }
+
+        const packageExists = await TourPackage.findOne({name});
+        if(packageExists){
             return res.status(400).json({message:"Package already exist in the DB"})
         }
         // Process uploaded files
@@ -35,8 +60,7 @@ const insertTourPackage = async(req,res) =>{
             tags: tags || []
         });
         return res.status(200).json(newPackage);
-    }
-    catch(err){
+    } catch(err){
         return res.status(500).json({message:"Internal server error"});
     }
 }
