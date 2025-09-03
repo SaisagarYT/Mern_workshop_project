@@ -11,7 +11,7 @@ const TourPackage = mongoose.Schema({
     },
     duration:{
         type:String,
-        required:Number,
+        required:true,
     },
     price:{
         type:Number,
@@ -29,10 +29,10 @@ const TourPackage = mongoose.Schema({
         type:String,
         required:true,
     },
-    itinearary:[
+    itinerary:[
         {
-            data:{
-                type:Date,
+            day:{
+                type:Number,
                 required:true,
             },
             title:{
@@ -50,4 +50,4 @@ const TourPackage = mongoose.Schema({
     ],
 },{timestamps:true});
 
-module.exports = mongoose.model('Tourpackage',TourPackage);
+module.exports = mongoose.model('TourPackage',TourPackage);

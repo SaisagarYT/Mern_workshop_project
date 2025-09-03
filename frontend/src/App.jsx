@@ -4,10 +4,10 @@ import { Routes, Route } from 'react-router-dom';
 import Landingpage from './pages/Landingpage';
 import Datepage from './pages/Datepage';
 import Informationpage from './pages/Informationpage';
-import Tourplan from './pages/Tourplanpage';
 import Tourplanpage from './pages/Tourplanpage';
 import Locationpage from './pages/Locationpage';
 import Gallerypage from './pages/Gallerypage';
+import Auth from './pages/Auth';
 
 const App = () => {
   return (
@@ -19,6 +19,7 @@ const App = () => {
         <Route path='/tourplan' element={<Tourplanpage/>}/>
         <Route path='/location' element={<Locationpage/>}/>
         <Route path='/gallery' element={<Gallerypage/>}/>
+        <Route path='/auth' element={<Auth/>}/>
       </Routes>
     </div>
   )

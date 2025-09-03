@@ -1,9 +1,51 @@
 import React from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import {Button,TextField,Select} from '@mui/material'
 import siteImage from '../assets/siteImage'
 import LandingPageTravelCard from '../reusable_components/LandingPageTravelCard'
 
 const Landingpage = () => {
+  const navigate = useNavigate();
+  const [scrollPosition, setScrollPosition] = React.useState(0);
+  const [cardWidth] = React.useState(280); // Approximate width of card + gap
+  const [visibleCards] = React.useState(3); // Number of cards visible at once
+  const [packages, setPackages] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
+
+  React.useEffect(() => {
+    const fetchPackages = async () => {
+      try {
+        const response = await axios.get('http://localhost:5001/api/package/displayPackages');
+        if (response.data) {
+          setPackages(Array.isArray(response.data) ? response.data : []);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error('Error fetching packages:', err);
+        setError(err.response?.data?.message || 'Failed to load packages');
+        setLoading(false);
+      }
+    };
+
+    fetchPackages();
+  }, []);
+
+  const scroll = (direction) => {
+    const scrollAmount = cardWidth * visibleCards;
+    const newPosition = direction === 'left'
+      ? Math.max(0, scrollPosition - scrollAmount)
+      : scrollPosition + scrollAmount;
+    
+    setScrollPosition(newPosition);
+  };
+
+  // Calculate if we should disable buttons
+  const isAtStart = scrollPosition === 0;
+  const totalCards = 7; // Total number of cards
+  const isAtEnd = scrollPosition >= (totalCards - visibleCards) * cardWidth;
+
   return (
     // Hero page
     <section id='header' className='w-full min-h-screen overflow-x-hidden px-20'>
@@ -21,7 +63,20 @@ const Landingpage = () => {
             <li>CONTACT</li>
         </div>
         <div className='flex-1/4 flex items-center h-full justify-end'>
-            <Button variant="contained" disableElevation>Book Now</Button>
+            <Button 
+              variant="contained" 
+              disableElevation
+              onClick={() => {
+                const token = localStorage.getItem('userToken');
+                if (!token) {
+                  navigate('/auth');
+                } else {
+                  navigate('/date');
+                }
+              }}
+            >
+              Book Now
+            </Button>
         </div>
       </nav>
       <div className='w-full bg-gray-200 rounded-4xl h-130 relative'>
@@ -34,7 +89,7 @@ const Landingpage = () => {
                 <TextField
                 className='w-full'
                 id="outlined-multiline-flexible"
-                label="Multiline"
+                label="Find here.."
                 multiline
                 />
             </div>
@@ -95,23 +150,64 @@ const Landingpage = () => {
           </h1>
           <p className='text-gray-500 w-70'>Some of the popular destinations to visit to create a beautiful memeories</p>
           <div className='flex gap-2'>
-            <span className='w-10 cursor-pointer border border-gray-300 flex h-10 items-center justify-center rounded-full bg-gray-50 shadow-lg'><i class="ri-arrow-left-long-fill"></i></span>
-            <span className='w-10 cursor-pointer flex h-10 items-center border border-gray-300 bg-gray-50 justify-center rounded-full shadow-lg'><i className="ri-arrow-right-long-fill"></i></span>
+            <button 
+              onClick={() => scroll('left')}
+              disabled={isAtStart}
+              className={`w-10 cursor-pointer border border-gray-300 flex h-10 items-center justify-center rounded-full bg-gray-50 shadow-lg hover:bg-gray-100 active:shadow-inner transition-all ${isAtStart ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
+              <i className="ri-arrow-left-long-fill"></i>
+            </button>
+            <button 
+              onClick={() => scroll('right')}
+              disabled={isAtEnd}
+              className={`w-10 cursor-pointer flex h-10 items-center border border-gray-300 bg-gray-50 justify-center rounded-full shadow-lg hover:bg-gray-100 active:shadow-inner transition-all ${isAtEnd ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
+              <i className="ri-arrow-right-long-fill"></i>
+            </button>
           </div>
         </div>
 
         {/* booking cards */}
 
-        <div className='w-full flex overflow-x-auto gap-4 h-100 mt-7 p-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200'>
+        <div 
+          style={{
+            transform: `translateX(-${scrollPosition}px)`,
+            transition: 'transform 0.5s ease-in-out'
+          }}
+          className='w-full flex gap-4 h-110 mt-7 p-4'>
           <div className='flex gap-4 min-w-min'>
-            {/* cards */}
-            <LandingPageTravelCard/>
-            <LandingPageTravelCard/>
-            <LandingPageTravelCard/>
-            <LandingPageTravelCard/>
-            <LandingPageTravelCard/>
-            <LandingPageTravelCard/>
-            <LandingPageTravelCard/>
+            {loading ? (
+              // Loading state
+              <div className='w-full flex justify-center items-center py-8'>
+                <p className='text-gray-500'>Loading packages...</p>
+              </div>
+            ) : error ? (
+              // Error state
+              <div className='w-full flex justify-center items-center py-8'>
+                <p className='text-red-500'>{error}</p>
+              </div>
+            ) : packages.length === 0 ? (
+              // Empty state
+              <div className='w-full flex justify-center items-center py-8'>
+                <p className='text-gray-500'>No packages available</p>
+              </div>
+            ) : (
+              // Render packages
+              packages.map((pkg) => (
+                <LandingPageTravelCard
+                  key={pkg._id}
+                  name={pkg.name}
+                  destination={pkg.destination}
+                  duration={pkg.duration?.split(' ')[0] || '0'} // Extract number from duration string
+                  price={pkg.price}
+                  description={pkg.description}
+                  images={pkg.images}
+                  available={pkg.availability}
+                  maxGroupSize={pkg.maxGroupSize}
+                  tags={pkg.tags}
+                />
+              ))
+            )}
           </div>
         </div>
         
