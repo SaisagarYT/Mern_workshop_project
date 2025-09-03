@@ -17,6 +17,7 @@ const insertTourPackage = async(req,res) =>{
         // Log the received data for debugging
         console.log('Received itinerary:', req.body.itinerary);
         console.log('Received tags:', req.body.tags);
+        console.log('Received files:', req.files);
 
         // Handle JSON parsing with type checking
         try {
@@ -126,6 +127,26 @@ const deletePackage = async(req,res) =>{
     }
 }
 
-module.exports = {insertTourPackage, displayAllPackages, updatePackage,deletePackage};
+const getPackageById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const package = await TourPackage.findById(id);
 
+        if (!package) {
+            return res.status(404).json({ message: "Package not found" });
+        }
 
+        return res.status(200).json(package);
+    } catch (error) {
+        console.error('Error in getPackageById:', error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+module.exports = {
+    insertTourPackage,
+    displayAllPackages,
+    updatePackage,
+    deletePackage,
+    getPackageById
+};

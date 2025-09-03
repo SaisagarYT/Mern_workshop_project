@@ -4,7 +4,8 @@ const path = require('path');
 // Configure multer for storing tour package images
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/tourpackages/');
+        const uploadPath = path.join(__dirname, '..', 'uploads', 'tourpackages');
+        cb(null, uploadPath);
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
